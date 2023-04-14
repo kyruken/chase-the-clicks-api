@@ -1,5 +1,6 @@
 import express from "express";
 import { SuperfaceClient } from "@superfaceai/one-sdk";
+import localData from './data.js';
 const app = express();
 app.set("trust proxy", true);
 
@@ -28,13 +29,15 @@ async function run(ip) {
   try {
     const data = result.unwrap();
     console.log(data.addressCountry);
+    localData.push(data.addressCountry);
   } catch (error) {
     console.error(error);
   }
 }
 
 app.get("/", async (req, res) => {
-  res.send(await run(req.ip));
+  await run(req.ip);
+  res.send(localData);
 });
 
 
