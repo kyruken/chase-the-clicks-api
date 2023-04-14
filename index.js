@@ -42,9 +42,13 @@ async function run(ip) {
 }
 
 app.get("/", async (req, res) => {
-  await run(req.ip);
   res.json(localData);
 });
+
+app.post("/", async (req, res) => {
+    await run(req.ip);
+    res.json(localData);
+  });
 
 
 
