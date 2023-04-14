@@ -27,7 +27,7 @@ async function run(ip) {
   // Handle the result
   try {
     const data = result.unwrap();
-    console.log(data);
+    console.log(data.addressCountry);
   } catch (error) {
     console.error(error);
   }
