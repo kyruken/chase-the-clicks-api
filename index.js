@@ -37,7 +37,7 @@ async function run(ip) {
 
 app.get("/", async (req, res) => {
   await run(req.ip);
-  res.send(localData);
+  res.send(JSON.stringify(localData));
 });
 
 
