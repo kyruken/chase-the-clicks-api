@@ -1,8 +1,14 @@
 import express from "express";
 import { SuperfaceClient } from "@superfaceai/one-sdk";
 import localData from './data.js';
+import cors from 'cors';
 const app = express();
 app.set("trust proxy", true);
+
+app.use(cors({
+    origin: '*',
+    methods: ['GET']
+}))
 
 // You can manage tokens here: https://superface.ai/insights
 const sdk = new SuperfaceClient({ sdkAuthToken: 'sfs_7439ab3549b6899fcf612babd08dfbb8e822b492d5abdb3182f7e1f022bb2d0cdec29bd4b6a1866420063c2661817307422782bf925546eaa1d3f5a037f729f4_0ab62307' });
@@ -37,7 +43,7 @@ async function run(ip) {
 
 app.get("/", async (req, res) => {
   await run(req.ip);
-  res.send(JSON.stringify(localData));
+  res.json(localData);
 });
 
 
